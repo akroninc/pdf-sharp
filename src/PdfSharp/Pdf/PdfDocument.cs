@@ -372,10 +372,10 @@ namespace PdfSharp.Pdf
                 // HACK: Remove XRefTrailer
                 if (_trailer is PdfCrossReferenceStream)
                 {
-                    var securityHandler = _securitySettings.SecurityHandler;
-                    _trailer = new PdfTrailer((PdfCrossReferenceStream) _trailer);
-
-                    _trailer._securityHandler = securityHandler;
+                    _trailer = new PdfTrailer((PdfCrossReferenceStream) _trailer)
+                    {
+                        _securityHandler = _securitySettings.SecurityHandler
+                    };
                 }
                 bool encrypt = _securitySettings.DocumentSecurityLevel != PdfDocumentSecurityLevel.None;
                 if (encrypt)
